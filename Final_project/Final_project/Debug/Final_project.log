@@ -1,0 +1,9 @@
+﻿  Source.cpp
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(39): warning C4244: '引數': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(54): warning C4305: '正在初始化': 從 'double' 轉換為 'float'，是由較大的類型轉換為較小的類型，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(78): warning C4305: '=': 從 'double' 轉換為 'float'，是由較大的類型轉換為較小的類型，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(129): warning C4305: '=': 從 'double' 轉換為 'float'，是由較大的類型轉換為較小的類型，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(147): warning C4305: '=': 從 'double' 轉換為 'float'，是由較大的類型轉換為較小的類型，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(158): warning C4244: '引數': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(166): warning C4244: '引數': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  Final_project.vcxproj -> C:\Users\LiangYu\Desktop\Final_projcet\Final_project\Debug\Final_project.exe
