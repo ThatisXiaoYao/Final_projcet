@@ -11,16 +11,16 @@ struct Point
 {
 	int x;
 	int y;
-} a[4], b[4], model[4];
+} a[4], b[4], next[4],shadow[4];
 
 int figures[7][4] =
 {
-	{1,3,5,7 },// I
+	{0,2,4,6}, // I
 	{2,4,5,7}, // Z
 	{3,5,4,6}, // S
-	{3,5,4,7 },// T
-	{2,3,5,7}, // L
-	{3,5,7,6}, // J
+	{3,5,4,7}, // T
+	{3,5,6,7}, // L
+	{2,3,5,7}, // J
 	{2,3,4,5}, // O
 };
 
@@ -38,20 +38,20 @@ int main()
 {
 	srand(time(0));
 
-	RenderWindow window(VideoMode(320, 480), "The Game!");
+	RenderWindow window(VideoMode(640, 720), "The Game!");
 
 	Texture t1, t2, t3, t4;
-	t1.loadFromFile("./tiles.png");
-	t2.loadFromFile("./background.png");
-	t3.loadFromFile("./frame.png");
-	t4.loadFromFile("./tiles_model.png");
+	t1.loadFromFile("./tiles_DIY.png");
+	t2.loadFromFile("./cell.png");
+	t3.loadFromFile("./tiles_shadow.png");
+	t4.loadFromFile("./next_box.png");
 
-	Sprite s(t1), background(t2), frame(t3),model(t4);
+	Sprite s(t1),cell(t2),box(t4);
 
 	int dx = 0; 
 	int rotate = 0; 
-	int block_now = 0;		//
-	int colorNum = 1;
+	int block_now = 0,block_next = 0;
+	int colorNum = 1,colorNum_next = 1;
 	float timer = 0, delay = 0.9;
 	////////
 	int score = 0;
@@ -69,8 +69,17 @@ int main()
 
 	for (int i = 0; i < 4; i++)
 	{
-		a[i].x = 4 + figures[block_now][i] % 2;
-		a[i].y = figures[block_now][i] / 2;
+		a[i].x = 3 + (figures[block_now][i] / 2);
+		a[i].y = figures[block_now][i] % 2;
+	}
+
+	block_next = rand() % 7;
+	colorNum_next = 1 + block_next;
+
+	for (int i = 0; i < 4; i++)
+	{
+		next[i].x = figures[block_next][i] / 2;
+		next[i].y = figures[block_next][i] % 2;
 	}
 
 	while (window.isOpen())
@@ -86,8 +95,8 @@ int main()
 				window.close();
 
 			if (e.type == Event::KeyPressed)
-				if (e.key.code == Keyboard::W) rotate = 1; 
-				else if (e.key.code == Keyboard::X) rotate = 2;
+				if (e.key.code == Keyboard::K) rotate = 1;
+				else if (e.key.code == Keyboard::J) rotate = 2;
 				else if (e.key.code == Keyboard::A) dx = -1;
 				else if (e.key.code == Keyboard::D) dx = 1;
 				else if (e.key.code == Keyboard::Space) drop = true;
@@ -99,7 +108,7 @@ int main()
 		else delay = 1.0 - 0.1 * Level;
 
 		//// <- Move -> ///
-		for (int i = 0; i < 4; i++) { b[i] = a[i]; a[i].x += dx;}
+		for (int i = 0; i < 4; i++) { b[i] = a[i]; a[i].x += dx; }
 		dx = 0;							//
 		if (!check()) for (int i = 0; i < 4; i++) a[i] = b[i];
 		if (drop)delay = 0;				//
@@ -119,7 +128,7 @@ int main()
 			for (int i = 0; i < 4; i++)
 			{
 				if (a[i].x < 0) for (int j = 0; j < 4; j++) a[j].x++;
-				else if(a[i].x >= width) for (int j = 0; j < 4; j++) a[j].x--;
+				else if (a[i].x >= width) for (int j = 0; j < 4; j++) a[j].x--;
 				else if (a[i].y < 0) for (int j = 0; j < 4; j++) a[j].y++;
 				else if (field[a[i].y][a[i].x]) for (int j = 0; j < 4; j++) a[j] = b[j];
 			}
@@ -140,7 +149,8 @@ int main()
 			for (int i = 0; i < 4; i++)
 			{
 				if (a[i].x < 0) for (int j = 0; j < 4; j++) a[j].x++;
-				else if(a[i].x >= width) for (int j = 0; j < 4; j++) a[j].x--;
+				else if (a[i].x >= width) for (int j = 0; j < 4; j++) a[j].x--;
+				else if (a[i].y < 0) for (int j = 0; j < 4; j++) a[j].y++;
 				else if (field[a[i].y][a[i].x]) for (int j = 0; j < 4; j++) a[j] = b[j];
 			}
 			rotate = 0;
@@ -171,6 +181,7 @@ int main()
 		if (remove_counter != 0)
 		{
 			printf("now score: %d\n", score);
+			Level_counter += remove_counter;
 			remove_counter = 0;
 		}
 
@@ -183,9 +194,25 @@ int main()
 			{
 				for (int i = 0; i < 4; i++) field[b[i].y][b[i].x] = colorNum;
 
-				block_now = rand() % 7;
+				block_now = block_next;
 				colorNum = 1 + block_now;
-				Level_counter++;
+
+				for (int i = 0; i < 4; i++)
+				{
+					a[i].x = 3 + (figures[block_now][i] / 2);
+					a[i].y = figures[block_now][i] % 2;
+				}
+
+				block_next = rand() % 7;
+				colorNum_next = 1 + block_next;
+
+				for (int i = 0; i < 4; i++)
+				{
+					next[i].x = figures[block_next][i] / 2;
+					next[i].y = figures[block_next][i] % 2;
+				}
+
+				if (block_now == 0) for (int i = 0; i < 4; i++) a[i].y++;
 
 				////Level////
 				if (Level_counter % 30 == 0 && Level < 9)
@@ -194,11 +221,6 @@ int main()
 					printf("\nLevel %d\n\n", Level);
 				}
 
-				for (int i = 0; i < 4; i++)
-				{
-					a[i].x =4 + figures[block_now][i] % 2;
-					a[i].y =figures[block_now][i] / 2;
-				}
 				drop = false;			//
 				delay = 1.0 - 0.1 * Level;
 			}
@@ -218,33 +240,65 @@ int main()
 			if (count < width) k--;
 			else if (count == width)
 				remove_counter++;
+				
 		}
-		
-		/////////draw//////////
-		window.clear(Color::White);
-		window.draw(background);
 
+		/////////draw//////////
+		window.clear(Color::Black);
+
+
+		////background////
+		unsigned char CELL_SIZE = 36;
+		unsigned char COLUMNS = 10;
+		unsigned char ROWS = 20;
+		unsigned char SCREEN_RESIZE = 4;
+
+		//unsigned short FRAME_DURATION = 16667;
+
+		for (unsigned char i = 0; i < COLUMNS; i++)
+		{
+			for (unsigned char j = 0; j < ROWS; j++)
+			{
+				cell.setPosition(CELL_SIZE*i, CELL_SIZE*j);
+				window.draw(cell);
+			}
+		}
+
+		box.setPosition(400, 30);
+		window.draw(box);
+		
+
+		////blocks////
 		for (int i = 0; i < high; i++)
+		{
 			for (int j = 0; j < width; j++)
 			{
 				if (field[i][j] == 0) continue;
-				s.setTextureRect(IntRect(field[i][j] * 18, 0, 18, 18));
-				s.setPosition(j * 18, i * 18);
-				s.move(28, 31); //offset
+				s.setTextureRect(IntRect(field[i][j] * 36, 0, 36, 36));
+				s.setPosition(j * 36, i * 36);
 				window.draw(s);
 			}
+		}
 
 		for (int i = 1; i < 5; i++)
 		{
-			s.setTextureRect(IntRect(colorNum * 18, 0, 18, 18));
-			s.setPosition(a[i].x * 18, a[i].y * 18);
-			s.move(28, 31); //offset
+			s.setTextureRect(IntRect(colorNum * 36, 0, 36, 36));
+			s.setPosition(a[i].x * 36, a[i].y * 36);
 			window.draw(s);
 		}
 
-		window.draw(frame);
+
+		for (int i = 0; i < 4; i++)
+		{
+			s.setTextureRect(IntRect(colorNum_next * 36, 0, 36, 36));
+			s.setPosition(next[i].x * 36, next[i].y * 36);
+			s.move(400, 30);
+			window.draw(s);
+		}
+
 		window.display();
 	}
 
+	//system("pause");	
 	return 0;
 }

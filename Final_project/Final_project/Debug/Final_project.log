@@ -1,9 +1,11 @@
 ﻿  Source.cpp
 c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(39): warning C4244: '引數': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
 c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(55): warning C4305: '正在初始化': 從 'double' 轉換為 'float'，是由較大的類型轉換為較小的類型，可能導致資料遺失
-c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(98): warning C4305: '=': 從 'double' 轉換為 'float'，是由較大的類型轉換為較小的類型，可能導致資料遺失
-c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(99): warning C4244: '=': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
-c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(203): warning C4244: '=': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
-c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(232): warning C4244: '引數': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
-c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(240): warning C4244: '引數': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(107): warning C4305: '=': 從 'double' 轉換為 'float'，是由較大的類型轉換為較小的類型，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(108): warning C4244: '=': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(225): warning C4244: '=': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(262): warning C4244: '引數': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(278): warning C4244: '引數': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(286): warning C4244: '引數': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+c:\users\liangyu\desktop\final_projcet\final_project\final_project\source.cpp(294): warning C4244: '引數': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
   Final_project.vcxproj -> C:\Users\LiangYu\Desktop\Final_projcet\Final_project\Debug\Final_project.exe
