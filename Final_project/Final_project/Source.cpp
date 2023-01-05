@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
-#include <math.h>
 
 using namespace sf;
 
@@ -174,12 +173,12 @@ int main()
 
 			//// <- Move -> ///
 			for (int i = 0; i < 4; i++) { b[i] = a[i]; a[i].x += dx; move_ = 1; }
-			dx = 0;							//
+			dx = 0;							
 
 			for (int i = 0; i < 4; i++) { shadow[i].x = a[i].x; shadow[i].y = a[i].y; }
 
 			if (!check(a)) for (int i = 0; i < 4; i++) a[i] = b[i];
-			if (drop)delay = 0;				//
+			if (drop)delay = 0;				
 
 			//////Rotate//////
 			if (rotate == 1)
@@ -218,7 +217,7 @@ int main()
 				rotate = 0;
 			}
 
-			if (rotate == 2)			//
+			if (rotate == 2)		
 			{
 				Point p = a[2]; //center of rotation
 				for (int i = 0; i < 4; i++)
@@ -311,7 +310,7 @@ int main()
 
 					Hold = 0;
 					Latch = false;
-					drop = false;			//
+					drop = false;		
 					delay = 1.0 - 0.1 * Level;
 				}
 				timer = 0;
